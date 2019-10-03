@@ -1,25 +1,29 @@
 <template lang="pug">
-  main
+  v-container
     // Search input to filters restaurants
     form
       input(v-model="query" type="search" placeholder="Search...")
-
+    h2.display-1.text-center Últimas noticias
     // Noticias cards
-    div(v-for="noticia in noticias")
-      div
-        //- img(:src="'http://localhost:1337/' + noticia.Imagenes" alt="")
-        //-   canvas(width="600" height="400")
-        div
-          div
-            h3 {{ noticia.Title }}
-            p {{ noticia.Contenido }}
-            // Link to the restaurant using router-link
-            //- router-link(:to="{ name: 'restaurants-id', params: { id: restaurant.id }}" tag="a") See dishes
+    v-row(justify="center")
+      v-col(cols="12" md="6" lg="4" v-for="noticia in noticias")
+        v-card(max-width="512" style="margin: 0 auto")
+          v-img(v-if="noticia.Imagenes[0]" :src="'http://localhost:1337' + noticia.Imagenes[0].url" height="250")
+          v-card-title {{ noticia.Titulo }}
+          v-card-actions
+            v-btn(text) Compartir
+            .flex-grow-1
+            v-btn(icon @click="show = !show")
+              v-icon {{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+          //- img(:src= alt="")
+          //-   canvas(width="600" height="400")
+          v-expand-transition
+            div(v-show="show")
+              v-card-text {{ noticia.Descripcion }}
 
-      // If no restaurants have been found
-      div(v-if="filteredList.length == 0")
-        img(src="https://assets-ouch.icons8.com/preview/19/52de2377-696e-4194-8c63-0a81aef60b4f.png" height="800" width="800")
-      p No restaurants found
+        // If no restaurants have been found
+        div(v-if="filteredList.length == 0")
+          p No hay noticias encontradas
 </template>
 
 <script>
@@ -29,15 +33,9 @@ import noticiasQuery from '@/apollo/queries/noticia/noticias'
 export default {
   data() {
     return {
-      // Initialize an empty restaurants variabkle
       noticias: [],
-      query: ''
-    }
-  },
-  apollo: {
-    noticias: {
-      prefetch: true,
-      query: noticiasQuery
+      query: '',
+      show: false
     }
   },
   computed: {
@@ -47,6 +45,31 @@ export default {
         return noticia.Titulo.toLowerCase().includes(this.query.toLowerCase())
       })
     }
+  },
+  apollo: {
+    noticias: {
+      prefetch: true,
+      query: noticiasQuery
+    }
   }
+  //       // Initialize an empty restaurants variabkle
+  //       carrousels: [],
+  //       noticias: [],
+  //       query: ''
+  //     }
+  //   },
+  //   apollo: {
+  //     carrousels: {
+  //       prefetch: true,
+  //       query: carrouselQuery
+  //     },
+  //     noticias: {
+  //       prefetch: true,
+  //       query: noticiasQuery
+  //     }
+  //   },
+  //     images() {
+  //       return this.carrousels[0].Imagenes || []
+  //     }
 }
 </script>

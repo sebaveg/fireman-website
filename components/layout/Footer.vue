@@ -1,4 +1,4 @@
 <template lang="pug">
-  v-footer(fixed app)
+  v-footer(app fixed dark)
     span &copy; 2019
 </template>

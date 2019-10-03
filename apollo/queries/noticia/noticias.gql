@@ -1,7 +1,9 @@
 query Restaurants {
   noticias {
-    Title
-    Contenido
-    Imagenes
+    Titulo
+    Descripcion
+    Imagenes {
+      url
+    }
   }
 }

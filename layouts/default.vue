@@ -2,8 +2,7 @@
   v-app
     FireHeader
     v-content
-      v-container
-        nuxt
+      nuxt
     FireFooter
 </template>
 

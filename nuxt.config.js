@@ -17,7 +17,14 @@ module.exports = {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&display=swap'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -26,7 +33,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/styles.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -45,7 +52,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/apollo'
+    '@nuxtjs/apollo',
+    '@nuxtjs/markdownit'
   ],
   apollo: {
     clientConfigs: {
@@ -53,6 +61,9 @@ module.exports = {
         httpEndpoint: 'http://localhost:1337/graphql'
       }
     }
+  },
+  markdownit: {
+    injected: true
   },
   /*
    ** Axios module configuration

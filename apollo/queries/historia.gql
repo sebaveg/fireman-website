@@ -1,0 +1,9 @@
+query Historias {
+  historias {
+    titulo
+    imagenes {
+      url
+    }
+    historia
+  }
+}

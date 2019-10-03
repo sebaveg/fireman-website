@@ -5,8 +5,8 @@
     .presentation
       h4.body-1 Bienvenidos a
       br
-      h1.display-2.font-weight-bold {{ title }}
-    v-navigation-drawer(app disable-resize-watcher fixed v-model="drawer")
+      h1.display-2.font-weight-bold.text-center {{ title }}
+    v-navigation-drawer(app disable-resize-watcher fixed v-model="drawer").navigation-style
       v-list(nav)
         v-list-item(two-line)
           v-list-item-avatar
@@ -28,11 +28,12 @@
             v-list-item-title(v-text="item.title")
     v-app-bar.appbar(color="#353333" dark elevation="10")
       v-app-bar-nav-icon(class="hidden-md-and-up" @click.stop="drawer = !drawer")
-      v-btn(text nuxt to="/noticias") Noticias
-      v-btn(text) Prevencion
-      v-img.logo(src="logo.jpg" height="100" width="100")
-      v-btn(text nuxt to="/about") Sobre nosotros
-      v-btn(text) Contacto
+      v-toolbar-items.appbar(class="hidden-sm-and-down")
+        v-btn(text nuxt to="/noticias") Noticias
+        v-btn(text nuxt to="/prevencion") Prevencion
+        nuxt-link(to="/"): v-img.logo(src="logo.jpg" height="125" width="125")
+        v-btn(text nuxt to="/about") Sobre nosotros
+        v-btn(text) Contacto
 </template>
 
 <script>
@@ -43,14 +44,24 @@ export default {
       drawer: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
+          icon: 'mdi-newspaper',
+          title: 'Noticias',
+          to: '/noticias'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-shield-alert-outline',
+          title: 'Prevencion',
+          to: '/prevencion'
+        },
+        {
+          icon: 'mdi-information',
+          title: 'Sobre nosotros',
+          to: '/about'
+        },
+        {
+          icon: 'mdi-account-box',
+          title: 'Contacto',
+          to: '/contacto'
         }
       ],
       title: 'Bomberos Voluntarios de Brandsen'
@@ -65,9 +76,12 @@ export default {
 .presentation {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
 }
 .presentation {
-  background: rgb(177, 16, 16);
+  background-color: rgb(177, 16, 16);
   color: #fff;
   flex-wrap: wrap;
   padding: 1.5em 0;
@@ -81,6 +95,11 @@ export default {
 }
 .logo {
   border-radius: 50%;
-  margin: 0 1rem;
+  position: relative;
+  z-index: 10;
+}
+.navigation-style {
+  position: absolute;
+  z-index: 20;
 }
 </style>
