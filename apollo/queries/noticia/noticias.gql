@@ -1,4 +1,4 @@
-query Restaurants {
+query Noticias {
   noticias {
     Titulo
     Descripcion

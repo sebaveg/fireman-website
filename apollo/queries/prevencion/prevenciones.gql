@@ -1,0 +1,9 @@
+query Prevenciones {
+  prevenciones {
+    Titulo
+    descripcion
+    imagenes {
+      url
+    }
+  }
+}

@@ -5,7 +5,7 @@
     .presentation
       h4.body-1 Bienvenidos a
       br
-      h1.display-2.font-weight-bold.text-center {{ title }}
+      h1.display-2.font-weight-bold.text-center(:class="{'display-1': $vuetify.breakpoint.xs}") {{ title }}
     v-navigation-drawer(app disable-resize-watcher fixed v-model="drawer").navigation-style
       v-list(nav)
         v-list-item(two-line)
@@ -32,8 +32,10 @@
         v-btn(text nuxt to="/noticias") Noticias
         v-btn(text nuxt to="/prevencion") Prevencion
         nuxt-link(to="/"): v-img.logo(src="logo.jpg" height="125" width="125")
-        v-btn(text nuxt to="/about") Sobre nosotros
-        v-btn(text) Contacto
+        v-btn(text nuxt to="/about") Historia
+        v-btn(text nuxt to="/contacto") Contacto
+      v-spacer(class="hidden-md-and-up")
+      nuxt-link(class="hidden-md-and-up" to="/"): v-img.logo(src="logo.jpg" height="75" width="75")
 </template>
 
 <script>
@@ -55,7 +57,7 @@ export default {
         },
         {
           icon: 'mdi-information',
-          title: 'Sobre nosotros',
+          title: 'Historia',
           to: '/about'
         },
         {
