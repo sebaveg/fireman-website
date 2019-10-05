@@ -1,9 +1,0 @@
-query Noticias {
-  noticias {
-    titulo
-    descripcion
-    imagenes {
-      url
-    }
-  }
-}

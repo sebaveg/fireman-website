@@ -1,7 +1,0 @@
-query Carousels {
-  carousels {
-    imagen {
-      url
-    }
-  }
-}
