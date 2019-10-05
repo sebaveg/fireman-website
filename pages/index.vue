@@ -5,7 +5,7 @@
         v-for="(item, i) in carousels"
         :key="i"
       )
-        v-parallax(:src="'https://bomberos-brandsen-backend.herokuapp.com'+item.imagen.url" height="700")
+        v-parallax(:src="'https://bomberos-brandsen-backend.herokuapp.com'+item.imagen.url")
     v-container
       v-alert(type="error") En presencia de humo, camina lo mas agachado posible por debajo del mismo y siempre que sea posible, cubriéndote las vías respiratorias con un trapo o un pañuelo húmedo.
 </template>
