@@ -4,13 +4,11 @@
       v-col(cols="12")
         h1.text-center.my-5 {{ historias[0].titulo }}
         figure
-          v-img(:src="'http://localhost:1337/'+historias[0].imagenes[0].url")
-        div.mt-5(v-html="$md.render(historias[0].historia || 'No se ha escrito una historia')")
+          v-img(:src="'https://bomberos-brandsen-backend.herokuapp.com/'+historias[0].imagen.url")
+        div.mt-5(v-html="$md.render(historias[0].descripcion || 'No se ha escrito una historia')")
 </template>
 
 <script>
-import historiasQuery from '@/apollo/queries/historia'
-
 export default {
   data() {
     return {
@@ -18,11 +16,11 @@ export default {
       query: ''
     }
   },
-  apollo: {
-    historias: {
-      prefetch: true,
-      query: historiasQuery
-    }
+  async asyncData({ $axios }) {
+    const { data } = await $axios.get(
+      'https://bomberos-brandsen-backend.herokuapp.com/historias'
+    )
+    return { historias: data }
   }
 }
 </script>

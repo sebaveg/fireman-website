@@ -55,16 +55,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/apollo',
     '@nuxtjs/markdownit'
   ],
-  apollo: {
-    clientConfigs: {
-      default: {
-        httpEndpoint: 'http://localhost:1337/graphql'
-      }
-    }
-  },
   markdownit: {
     injected: true
   },

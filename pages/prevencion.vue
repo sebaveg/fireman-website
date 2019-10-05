@@ -4,8 +4,8 @@
     v-row(justify="center")
       v-col(cols="12" md="6" v-for="(prevencion,i) in prevenciones" :key="i")
         v-card(max-width="912" style="margin: 0 auto")
-          v-img(v-if="prevencion.imagenes.url" :src="'http://localhost:1337' + prevencion.imagenes.url" height="250")
-          v-card-title {{ prevencion.Titulo }}
+          v-img(v-if="prevencion.imagenes.url" :src="'https://bomberos-brandsen-backend.herokuapp.com' + prevencion.imagenes.url" height="250")
+          v-card-title {{ prevencion.titulo }}
           v-card-text
             div(v-html="$md.render(prevencion.descripcion)")
           v-card-actions
@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import prevencionesQuery from '@/apollo/queries/prevencion/prevenciones'
-
 export default {
   name: 'Prevenciones',
   data() {
@@ -23,11 +21,11 @@ export default {
       query: ''
     }
   },
-  apollo: {
-    prevenciones: {
-      prefetch: true,
-      query: prevencionesQuery
-    }
+  async asyncData({ $axios }) {
+    const { data } = await $axios.get(
+      'https://bomberos-brandsen-backend.herokuapp.com/prevencions'
+    )
+    return { prevenciones: data }
   }
 }
 </script>

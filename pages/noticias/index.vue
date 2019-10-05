@@ -3,13 +3,13 @@
     // Search input to filters restaurants
     //- form
     //-   input(v-model="query" type="search" placeholder="Search...")
-    h2.display-1.text-center Últimas noticias
+    h2.display-1.text-center.mt-5 Últimas noticias
     // Noticias cards
     v-row(justify="center")
       v-col(cols="12" md="6" lg="4" v-for="(noticia,i) in noticiasWithShow" :key="i")
         v-card(max-width="512" style="margin: 0 auto")
-          v-img(v-if="noticia.Imagenes[0]" :src="'http://localhost:1337' + noticia.Imagenes[0].url" height="250")
-          v-card-title {{ noticia.Titulo }}
+          v-img(v-if="noticia.imagenes[0]" :src="'https://bomberos-brandsen-backend.herokuapp.com' + noticia.imagenes[0].url" height="250")
+          v-card-title {{ noticia.titulo }}
           v-card-actions
             v-btn(text) Compartir
             .flex-grow-1
@@ -19,7 +19,7 @@
           //-   canvas(width="600" height="400")
           v-expand-transition
             div(v-show="noticia.show")
-              v-card-text {{ noticia.Descripcion }}
+              v-card-text {{ noticia.contenido }}
 
         // If no noticias have been found
         div(v-if="filteredList.length == 0")
@@ -28,12 +28,10 @@
 
 <script>
 // Import the restaurants query
-import noticiasQuery from '@/apollo/queries/noticia/noticias'
 
 export default {
   data() {
     return {
-      noticias: [],
       noticiasWithShow: [], // individual expansion card
       query: ''
     }
@@ -42,15 +40,15 @@ export default {
     // Search system
     filteredList() {
       return this.noticias.filter((noticia) => {
-        return noticia.Titulo.toLowerCase().includes(this.query.toLowerCase())
+        return noticia.titulo.toLowerCase().includes(this.query.toLowerCase())
       })
     }
   },
-  apollo: {
-    noticias: {
-      prefetch: true,
-      query: noticiasQuery
-    }
+  async asyncData({ $axios }) {
+    const { data } = await $axios.get(
+      'https://bomberos-brandsen-backend.herokuapp.com/noticias'
+    )
+    return { noticias: data }
   },
   mounted() {
     this.addShow()

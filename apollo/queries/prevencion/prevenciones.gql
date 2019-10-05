@@ -1,6 +1,6 @@
 query Prevenciones {
   prevenciones {
-    Titulo
+    titulo
     descripcion
     imagenes {
       url
