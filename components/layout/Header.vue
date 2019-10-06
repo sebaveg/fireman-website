@@ -29,6 +29,7 @@
     v-app-bar.appbar(color="#353333" dark elevation="10")
       v-app-bar-nav-icon(class="hidden-md-and-up" @click.stop="drawer = !drawer")
       v-toolbar-items.appbar(class="hidden-sm-and-down")
+        v-btn(text nuxt to="/index") Home
         v-btn(text nuxt to="/noticias") Noticias
         v-btn(text nuxt to="/prevencion") Prevencion
         nuxt-link(to="/"): v-img.logo(src="logo.jpg" height="125" width="125")
@@ -45,6 +46,11 @@ export default {
     return {
       drawer: false,
       items: [
+        {
+          icon: 'mdi-home',
+          title: 'Home',
+          to: '/index'
+        },
         {
           icon: 'mdi-newspaper',
           title: 'Noticias',
